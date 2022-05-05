@@ -15,7 +15,7 @@ func Start() {
 
 	// setup config
 	// if no .env file, then ENV var will be used
-	configuration.SetUpConfig(".", ".env")
+	configuration.SetWithFilePath(".", ".env")
 	middlewares.Set(r)
 	api.Set(r)
 

@@ -8,11 +8,11 @@ import (
 	"github.com/spf13/viper"
 )
 
-// SetUpConfig will set config from .env if it's exist
+// SetWithFilePath will set config from .env if it's exist
 // otherwise it will set from system's ENV variables
 // filename should be and env file: .env or .env.* file
 // dirpath should be in this format: /some/dirpath
-func SetUpConfig(dirpath string, filename string) {
+func SetWithFilePath(dirpath string, filename string) {
 	fileExist := isFileExist(dirpath + "/" + filename)
 
 	if fileExist {
