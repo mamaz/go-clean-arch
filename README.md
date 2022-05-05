@@ -18,6 +18,14 @@ To test
 go test ./...
 ```
 
+## TODO
+
+- [ ] env variables	
+- [ ] response format
+- [ ] graceful shutdown
+- [ ] db timeouts
+
+
 ## LICENSE
 
 MIT
