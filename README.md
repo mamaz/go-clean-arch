@@ -25,7 +25,7 @@ We're using
 - [chi](https://github.com/go-chi/chi) for API framework
 - [sqlx](https://github.com/spf13/viper) for database
 - [viper](https://github.com/spf13/viper) for env variables
-- [testfify](https://github.com/stretchr/testify) for testing
+- [testify](https://github.com/stretchr/testify) for testing and mocking
 
 ### ENV
 
