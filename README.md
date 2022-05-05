@@ -20,7 +20,7 @@ go test ./...
 
 ## TODO
 
-- [ ] env variables	
+- [x] env variables	
 - [ ] response format
 - [ ] graceful shutdown
 - [ ] db timeouts
