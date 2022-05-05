@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"clean-arch/domain/user"
 	"context"
+	"go-clean-arch/domain/user"
 )
 
 type UserUC struct {

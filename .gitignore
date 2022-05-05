@@ -140,5 +140,10 @@ fabric.properties
 
 # Apple related
 .DS_Store
+
+# env variables
+
+.env
+
 # End of https://www.toptal.com/developers/gitignore/api/go,goland
 n

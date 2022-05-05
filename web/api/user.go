@@ -1,10 +1,10 @@
 package api
 
 import (
-	"clean-arch/app/user/delivery/http"
-	"clean-arch/app/user/repository"
-	"clean-arch/app/user/usecase"
-	"clean-arch/infrastructure/database"
+	"go-clean-arch/app/user/delivery/http"
+	"go-clean-arch/app/user/repository"
+	"go-clean-arch/app/user/usecase"
+	"go-clean-arch/infrastructure/database"
 
 	"github.com/go-chi/chi/v5"
 )

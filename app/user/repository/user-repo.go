@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"clean-arch/domain/user"
 	"context"
 	"database/sql"
 	"fmt"
+	"go-clean-arch/domain/user"
 
 	"github.com/jmoiron/sqlx"
 )

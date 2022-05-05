@@ -1,8 +1,8 @@
 package server
 
 import (
-	"clean-arch/web/api"
-	"clean-arch/web/middlewares"
+	"go-clean-arch/web/api"
+	"go-clean-arch/web/middlewares"
 	"log"
 	"net/http"
 

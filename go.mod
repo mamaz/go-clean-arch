@@ -1,15 +1,15 @@
-module clean-arch
+module go-clean-arch
 
 go 1.18
 
 require (
 	github.com/go-chi/chi/v5 v5.0.7
+	github.com/go-chi/cors v1.2.1
 	github.com/jmoiron/sqlx v1.3.5
+	github.com/joho/godotenv v1.4.0
 	github.com/lib/pq v1.10.5
 	github.com/stretchr/testify v1.7.1
 )
-
-require github.com/go-chi/cors v1.2.1 // indirect
 
 require (
 	github.com/davecgh/go-spew v1.1.0 // indirect

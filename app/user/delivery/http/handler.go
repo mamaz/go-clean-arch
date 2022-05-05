@@ -1,10 +1,10 @@
 package http
 
 import (
-	"clean-arch/app/user/usecase"
-	"clean-arch/domain/user"
 	"encoding/json"
 	"fmt"
+	"go-clean-arch/app/user/usecase"
+	"go-clean-arch/domain/user"
 	"log"
 	"net/http"
 

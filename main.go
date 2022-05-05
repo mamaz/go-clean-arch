@@ -1,6 +1,6 @@
 package main
 
-import "clean-arch/web/server"
+import "go-clean-arch/web/server"
 
 func main() {
 	server.Start()
