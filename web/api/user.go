@@ -21,8 +21,6 @@ func SetUserAPI(r *chi.Mux) {
 	repo := repository.NewUserRepo(db)
 	usecase := usecase.NewUserUC(repo)
 
-	usrHandler := http.NewHandler(usecase)
-
 	// route should be explicitly set
-	usrHandler.SetRoute(r)
+	http.NewHandler(usecase).SetRoute(r)
 }

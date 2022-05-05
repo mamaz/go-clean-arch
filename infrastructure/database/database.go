@@ -22,7 +22,7 @@ func CreateDBConnection(host string, port int, username string, password string,
 		log.Fatal("error on connecting to database: ", dberr)
 	}
 
-	fmt.Println("successfully connected to postgres database")
+	log.Println("successfully connected to postgres database")
 
 	return db
 }

@@ -28,7 +28,7 @@ otherwise it will set from system's ENV variables
 ## TODO
 
 - [x] env variables	
-- [ ] response format
+- [x] response format
 - [ ] graceful shutdown
 - [ ] db timeouts
 

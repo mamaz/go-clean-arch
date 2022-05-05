@@ -1,9 +1,8 @@
 package http
 
 import (
-	"encoding/json"
-	"fmt"
 	"go-clean-arch/app/user/usecase"
+	"go-clean-arch/domain/common/response"
 	"go-clean-arch/domain/user"
 	"log"
 	"net/http"
@@ -36,16 +35,21 @@ func (handler *UserHandler) SetRoute(r *chi.Mux) {
 func (handler *UserHandler) getAllUsers(w http.ResponseWriter, r *http.Request) {
 	users, err := handler.usecase.GetAllUsers()
 	if err != nil {
-		w.Write([]byte("error"))
+		log.Printf("error on fetching users: %+v", err)
+		render.Render(w, r, response.ErrInternalServer())
+		return
 	}
 
-	usersJSON, err := json.Marshal(users)
+	// WHY WE SHOULD DO THIS IN 2022?
+	renderers := []render.Renderer{}
+	for _, user := range users {
+		renderers = append(renderers, user)
+	}
+
+	render.Render(w, r, response.SuccessResponseList(renderers))
 	if err != nil {
-		w.Write([]byte(`{"error": "500"}`))
+		render.Render(w, r, response.ErrInternalServer())
 	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(fmt.Sprintf(`{"data": %s}`, string(usersJSON))))
 }
 
 func (handler *UserHandler) getUserById(w http.ResponseWriter, r *http.Request) {
@@ -53,28 +57,15 @@ func (handler *UserHandler) getUserById(w http.ResponseWriter, r *http.Request) 
 
 	userFetched, err := handler.usecase.GetUserByID(userID)
 	if err != nil {
-		log.Println("error: ", err)
-		r.Response.StatusCode = 500
-		w.Write([]byte(`{"error": "internal server error"}`))
+		log.Printf("error getting user by id %v: %v\n", userID, err)
+		render.Render(w, r, response.ErrInternalServer())
 		return
 	}
 
-	var empty user.User
-
-	if userFetched == empty {
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{}`))
-		return
-	}
-
-	userJSON, err := json.Marshal(userFetched)
+	err = render.Render(w, r, response.SuccessResponse(userFetched))
 	if err != nil {
-		w.Write([]byte(`{"error": "500"}`))
-		return
+		render.Render(w, r, response.ErrInternalServer())
 	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(userJSON))
 }
 
 func (handler *UserHandler) createUser(w http.ResponseWriter, r *http.Request) {
@@ -82,35 +73,29 @@ func (handler *UserHandler) createUser(w http.ResponseWriter, r *http.Request) {
 
 	err := render.Bind(r, request)
 	if err != nil {
-		errMessage := fmt.Sprintf(`{
-			"error": "400",
-			"message": %v
-		}`, err.Error())
-		w.Write([]byte(errMessage))
+		log.Printf("error on validating %+v", err)
+		render.Render(w, r, response.ErrBadRequest(err))
 		return
 	}
 
 	createdUser, err := handler.usecase.CreateUser(*request)
-
 	if err != nil {
 		log.Printf("error on creating user %+v", err)
-		w.Write([]byte(`{"error": "500"}`))
+		render.Render(w, r, response.ErrInternalServer())
 		return
 	}
 
-	userJSON, err := json.Marshal(createdUser)
-	if err != nil {
-		w.Write([]byte(`{"error": "500", "message": "error on marshalling user"}`))
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(userJSON))
+	render.Render(w, r, response.SuccessResponse(createdUser))
 }
 
 func (handler *UserHandler) deleteUser(w http.ResponseWriter, r *http.Request) {
-	userID := ""
+	userID := chi.URLParam(r, "userID")
+
 	err := handler.usecase.DeleteUser(userID)
 	if err != nil {
-		w.Write([]byte("error"))
+		render.Render(w, r, response.ErrInternalServer())
+		return
 	}
+
+	w.WriteHeader(http.StatusOK)
 }

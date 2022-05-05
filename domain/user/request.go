@@ -7,6 +7,6 @@ type UserRequest struct {
 	City string
 }
 
-func (a *UserRequest) Bind(r *http.Request) error {
+func (a UserRequest) Bind(r *http.Request) error {
 	return nil
 }
