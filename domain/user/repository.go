@@ -1,6 +1,8 @@
 package user
 
-import "context"
+import (
+	"context"
+)
 
 // IBaseRepo is a base repo
 // TODO: need to create base repo using generics

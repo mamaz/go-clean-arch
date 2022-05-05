@@ -1,8 +1,6 @@
 package user
 
-import (
-	"net/http"
-)
+import "net/http"
 
 type UserRequest struct {
 	Name string

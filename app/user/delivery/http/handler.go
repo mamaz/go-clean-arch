@@ -13,7 +13,6 @@ import (
 )
 
 type UserHandler struct {
-	//repo user.IUserRepo
 	usecase *usecase.UserUC
 }
 
