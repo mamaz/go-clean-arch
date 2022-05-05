@@ -19,7 +19,7 @@ func CreateDBConnection(host string, port int, username string, password string,
 
 	dberr := db.Ping()
 	if dberr != nil {
-		log.Fatal("error on connecting to database", dberr)
+		log.Fatal("error on connecting to database: ", dberr)
 	}
 
 	fmt.Println("successfully connected to postgres database")

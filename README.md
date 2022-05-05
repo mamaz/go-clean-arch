@@ -18,6 +18,13 @@ To test
 go test ./...
 ```
 
+### ENV Variables
+
+It is set using [Viper](https://github.com/spf13/viper), you can see the implementation on `infrastructure/configuration`
+
+It will set config from `.env` if it's exist,
+otherwise it will set from system's ENV variables
+
 ## TODO
 
 - [x] env variables	
