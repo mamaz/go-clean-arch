@@ -38,10 +38,10 @@ otherwise it will set from system's ENV
 
 - [x] env variables	
 - [x] response format
-- [ ] mocking
 - [ ] graceful shutdown
 - [ ] db timeouts
-
+- [ ] mocking examples
+- [ ] more docs
 
 ## LICENSE
 
