@@ -38,7 +38,7 @@ otherwise it will set from system's ENV
 
 - [x] env variables	
 - [x] response format
-- [ ] graceful shutdown
+- [x] graceful shutdown
 - [ ] logging format
 - [ ] db timeouts
 - [ ] mocking examples
