@@ -41,6 +41,7 @@ otherwise it will set from system's ENV
 - [x] graceful shutdown
 - [ ] logging format
 - [ ] db timeouts
+- [ ] migration script
 - [ ] mocking examples
 - [ ] more docs
 
