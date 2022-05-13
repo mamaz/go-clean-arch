@@ -5,6 +5,7 @@ import (
 )
 
 func Set(r *chi.Mux) {
-	SetUserAPI(r)
+	// SetUserAPI(r)
+	SetGraphqlAPI(r)
 	// place other APIs in here
 }

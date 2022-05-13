@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  go-clean-arch:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    container_name: go-clean-arch
+    ports:
+      - 8080:8080
+    environment:
+      - "APP_PORT=8080"
+    volumes:
+      - ./:/go/src/github.com/machtwatch/go-clean-arch
+    networks:
+      - local
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:12.0-alpine
+    environment:
+        POSTGRES_DB: go-clean-arch
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: machtwatch123
+        PGDATA: /var/lib/postgresql/data/go-clean-app
+    container_name: postgres-go-clean-arch
+    volumes:
+        - .docker/postgres-data:/var/lib/postgresql/data/go-clean-arch
+        - .docker/database_scripts:/docker-entrypoint-initdb.d
+        - .docker/seeding/seeds:/seeds
+    ports:
+        - "5432:5432"
+    networks:
+        - local
+
+networks:
+  local:
+    driver: bridge
