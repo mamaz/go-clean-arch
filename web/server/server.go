@@ -4,8 +4,6 @@ import (
 	"go-clean-arch/infrastructure/configuration"
 	"go-clean-arch/web/api"
 	"go-clean-arch/web/middlewares"
-	"log"
-	"net/http"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -19,6 +17,5 @@ func Start() {
 	middlewares.Set(r)
 	api.Set(r)
 
-	log.Println("Starting server in port :8080")
-	http.ListenAndServe(":8080", r)
+	startServerWithGracefulShutdown(r)
 }
