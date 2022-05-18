@@ -39,7 +39,7 @@ otherwise it will set from system's ENV
 - [x] env variables	
 - [x] response format
 - [x] graceful shutdown
-- [ ] logging format
+- [x] logging format
 - [ ] db timeouts
 - [ ] migration script
 - [ ] mocking examples
