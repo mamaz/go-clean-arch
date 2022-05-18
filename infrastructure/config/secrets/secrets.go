@@ -1,11 +1,13 @@
+// Package secrets are values that supposed to be secrets and private and not public consuming
+// for example: keys, passwords, ip addresses
+//
+// To differentiate with config, we place secrets on a different package, so it will be called from outside like this:
+// `secrets.POSTGRES_HOST` for instance
+// You just need to add more env variables here
 package secrets
 
 import "github.com/spf13/viper"
 
-// Secrets are values that supposed to be secrets and private and not public consuming
-// for example: keys, passwords, ip addresses
-
-// You just need to add more env variables here
 var POSTGRES_HOST string
 var POSTGRES_PORT int
 var POSTGRES_USERNAME string
