@@ -40,10 +40,10 @@ otherwise it will set from system's ENV
 - [x] response format
 - [x] graceful shutdown
 - [x] logging format
-- [ ] db timeouts
 - [ ] migration script
 - [ ] mocking examples
 - [ ] more docs
+- [ ] db timeouts
 
 ## LICENSE
 
