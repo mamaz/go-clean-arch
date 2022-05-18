@@ -27,7 +27,7 @@ func startServerWithGracefulShutdown(r *chi.Mux) {
 	go func() {
 		<-sig
 
-		graceful_timeout := configuration.SERVER_GRACEFUL_SHUTDOWN_TIMEOUT_S
+		graceful_timeout := configuration.CONFIG_SERVER_GRACEFUL_SHUTDOWN_TIMEOUT_S
 
 		shutDownCtx, _ := context.WithTimeout(serverCtx, time.Duration(graceful_timeout)*time.Second)
 

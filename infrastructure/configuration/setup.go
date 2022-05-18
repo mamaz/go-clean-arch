@@ -26,8 +26,9 @@ func SetWithFilePath(dirpath string, filename string) {
 		viper.AutomaticEnv()
 	}
 
-	// reload config
+	// reload config and secrets
 	reloadConfig()
+	reloadSecrets()
 }
 
 func isFileExist(path string) bool {
