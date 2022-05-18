@@ -13,11 +13,11 @@ const DEVELOPMENT = "development"
 const STAGING = "staging"
 const PROD = "production"
 
-func SetupWithEnv(environment string) {
+func SetupWithDebug(isDebug bool) {
 	var _logger zerolog.Logger
 
-	switch environment {
-	case LOCAL:
+	switch isDebug {
+	case true:
 		// on local, for debugging sake, the log format is set to plaintext
 		_logger = log.
 			With().
@@ -46,5 +46,5 @@ func Disable() {
 
 func Enable() {
 	// setting up env var with specific config will re-enable logging
-	SetupWithEnv(config.CONFIG_ENV)
+	SetupWithDebug(config.DEBUG)
 }

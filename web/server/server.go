@@ -15,7 +15,7 @@ func Start() {
 	// setup config
 	// if no .env file, then ENV var will be used
 	config.SetWithFilePath(".", ".env")
-	logger.SetupWithEnv(config.CONFIG_ENV)
+	logger.SetupWithDebug(config.DEBUG)
 
 	// print all env vars to make sure
 	// all are set, handy for debugging
