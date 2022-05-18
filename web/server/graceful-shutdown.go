@@ -3,7 +3,8 @@ package server
 import (
 	"context"
 	"fmt"
-	"go-clean-arch/infrastructure/configuration"
+	"go-clean-arch/infrastructure/config"
+	"go-clean-arch/infrastructure/config/secrets"
 	"log"
 	"net/http"
 	"os"
@@ -15,7 +16,7 @@ import (
 )
 
 func startServerWithGracefulShutdown(r *chi.Mux) {
-	addr := fmt.Sprintf("0.0.0.0:%d", configuration.APP_PORT)
+	addr := fmt.Sprintf("0.0.0.0:%d", secrets.APP_PORT)
 	server := &http.Server{Addr: addr, Handler: r}
 
 	// Create server context
@@ -27,7 +28,7 @@ func startServerWithGracefulShutdown(r *chi.Mux) {
 	go func() {
 		<-sig
 
-		graceful_timeout := configuration.CONFIG_SERVER_GRACEFUL_SHUTDOWN_TIMEOUT_S
+		graceful_timeout := config.CONFIG_SERVER_GRACEFUL_SHUTDOWN_TIMEOUT_S
 
 		shutDownCtx, _ := context.WithTimeout(serverCtx, time.Duration(graceful_timeout)*time.Second)
 
@@ -47,7 +48,7 @@ func startServerWithGracefulShutdown(r *chi.Mux) {
 		cancelServerCtx()
 	}()
 
-	log.Printf("Starting server in port :%d", configuration.APP_PORT)
+	log.Printf("Starting server in port :%d", secrets.APP_PORT)
 	err := server.ListenAndServe()
 	if err != nil && err != http.ErrServerClosed {
 		log.Fatal("error on starting up server", err)

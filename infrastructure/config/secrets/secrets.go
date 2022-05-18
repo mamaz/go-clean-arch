@@ -1,4 +1,4 @@
-package configuration
+package secrets
 
 import "github.com/spf13/viper"
 
@@ -13,7 +13,7 @@ var POSTGRES_PASSWORD string
 var POSTGRES_DATABASE string
 var APP_PORT int
 
-func reloadSecrets() {
+func Reload() {
 	APP_PORT = viper.GetInt("APP_PORT")
 	POSTGRES_HOST = viper.GetString("POSTGRES_HOST")
 	POSTGRES_PORT = viper.GetInt("POSTGRES_PORT")

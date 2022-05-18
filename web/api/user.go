@@ -4,7 +4,7 @@ import (
 	"go-clean-arch/app/user/delivery/http"
 	"go-clean-arch/app/user/repository"
 	"go-clean-arch/app/user/usecase"
-	"go-clean-arch/infrastructure/configuration"
+	"go-clean-arch/infrastructure/config/secrets"
 	"go-clean-arch/infrastructure/database"
 
 	"github.com/go-chi/chi/v5"
@@ -12,11 +12,11 @@ import (
 
 func SetUserAPI(r *chi.Mux) {
 	db := database.CreateDBConnection(
-		configuration.POSTGRES_HOST,
-		configuration.POSTGRES_PORT,
-		configuration.POSTGRES_USERNAME,
-		configuration.POSTGRES_PASSWORD,
-		configuration.POSTGRES_DATABASE,
+		secrets.POSTGRES_HOST,
+		secrets.POSTGRES_PORT,
+		secrets.POSTGRES_USERNAME,
+		secrets.POSTGRES_PASSWORD,
+		secrets.POSTGRES_DATABASE,
 	)
 	repo := repository.NewUserRepo(db)
 	usecase := usecase.NewUserUC(repo)

@@ -12,6 +12,8 @@ import (
 func CreateDBConnection(host string, port int, username string, password string, dbname string) *sqlx.DB {
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, username, password, dbname)
 
+	log.Println("database dsn " + dsn)
+
 	db, err := sqlx.Open("postgres", dsn)
 	if err != nil {
 		log.Fatal("error on opening db", err)

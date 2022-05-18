@@ -1,7 +1,7 @@
 package server
 
 import (
-	"go-clean-arch/infrastructure/configuration"
+	"go-clean-arch/infrastructure/config"
 	"go-clean-arch/web/api"
 	"go-clean-arch/web/middlewares"
 
@@ -13,7 +13,12 @@ func Start() {
 
 	// setup config
 	// if no .env file, then ENV var will be used
-	configuration.SetWithFilePath(".", ".env")
+	config.SetWithFilePath(".", ".env")
+
+	// print all env vars to make sure
+	// all are set, handy for debugging
+	PrintEnvVariables()
+
 	middlewares.Set(r)
 	api.Set(r)
 

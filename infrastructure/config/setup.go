@@ -1,14 +1,15 @@
-package configuration
+package config
 
 import (
 	"errors"
+	"go-clean-arch/infrastructure/config/secrets"
 	"log"
 	"os"
 
 	"github.com/spf13/viper"
 )
 
-// SetWithFilePath will set config from .env if it's exist
+// SetWithFilePath will set config and secrets from .env if it's exist
 // otherwise it will set from system's ENV variables
 // filename should be and env file: .env or .env.* file
 // dirpath should be in this format: /some/dirpath
@@ -28,7 +29,7 @@ func SetWithFilePath(dirpath string, filename string) {
 
 	// reload config and secrets
 	reloadConfig()
-	reloadSecrets()
+	secrets.Reload()
 }
 
 func isFileExist(path string) bool {
