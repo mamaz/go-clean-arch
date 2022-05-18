@@ -4,11 +4,11 @@ import (
 	"go-clean-arch/app/user/usecase"
 	"go-clean-arch/domain/common/response"
 	"go-clean-arch/domain/user"
-	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
+	"github.com/rs/zerolog/log"
 )
 
 type UserHandler struct {
@@ -35,7 +35,7 @@ func (handler *UserHandler) SetRoute(r *chi.Mux) {
 func (handler *UserHandler) getAllUsers(w http.ResponseWriter, r *http.Request) {
 	users, err := handler.usecase.GetAllUsers()
 	if err != nil {
-		log.Printf("error on fetching users: %+v", err)
+		log.Info().Msgf("error on fetching users: %+v", err)
 		render.Render(w, r, response.ErrInternalServer())
 		return
 	}
@@ -57,7 +57,7 @@ func (handler *UserHandler) getUserById(w http.ResponseWriter, r *http.Request) 
 
 	userFetched, err := handler.usecase.GetUserByID(userID)
 	if err != nil {
-		log.Printf("error getting user by id %v: %v\n", userID, err)
+		log.Info().Msgf("error getting user by id %v: %v\n", userID, err)
 		render.Render(w, r, response.ErrInternalServer())
 		return
 	}
@@ -73,14 +73,14 @@ func (handler *UserHandler) createUser(w http.ResponseWriter, r *http.Request) {
 
 	err := render.Bind(r, request)
 	if err != nil {
-		log.Printf("error on validating %+v", err)
+		log.Info().Msgf("error on validating %+v", err)
 		render.Render(w, r, response.ErrBadRequest(err))
 		return
 	}
 
 	createdUser, err := handler.usecase.CreateUser(*request)
 	if err != nil {
-		log.Printf("error on creating user %+v", err)
+		log.Info().Msgf("error on creating user %+v", err)
 		render.Render(w, r, response.ErrInternalServer())
 		return
 	}

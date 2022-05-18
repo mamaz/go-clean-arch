@@ -3,9 +3,9 @@ package config
 import (
 	"errors"
 	"go-clean-arch/infrastructure/config/secrets"
-	"log"
 	"os"
 
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
 )
 
@@ -21,7 +21,7 @@ func SetWithFilePath(dirpath string, filename string) {
 		viper.AddConfigPath(dirpath)
 
 		if err := viper.ReadInConfig(); err != nil {
-			log.Fatalf("error reading config file: %+v", err)
+			log.Fatal().Msgf("error reading config file: %+v", err)
 		}
 	} else {
 		viper.AutomaticEnv()

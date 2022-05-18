@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"go-clean-arch/infrastructure/config"
 	"go-clean-arch/infrastructure/config/secrets"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,6 +12,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/rs/zerolog/log"
 )
 
 func startServerWithGracefulShutdown(r *chi.Mux) {
@@ -35,26 +35,26 @@ func startServerWithGracefulShutdown(r *chi.Mux) {
 		go func() {
 			<-shutDownCtx.Done()
 			if shutDownCtx.Err() == context.DeadlineExceeded {
-				log.Fatal("graceful shutdown timed out.. forcing exit")
+				log.Fatal().Msg("graceful shutdown timed out.. forcing exit")
 			}
 		}()
 
-		log.Printf("Shutting down server with timeout: %v seconds", graceful_timeout)
+		log.Info().Msgf("Shutting down server with timeout: %v seconds", graceful_timeout)
 		err := server.Shutdown(shutDownCtx)
 		if err != nil {
-			log.Fatal("error on shutting down gracefully", err)
+			log.Fatal().Msgf("error on shutting down gracefully %+v", err)
 		}
 
 		cancelServerCtx()
 	}()
 
-	log.Printf("Starting server in port :%d", secrets.APP_PORT)
+	log.Info().Msgf("Starting server in port :%d", secrets.APP_PORT)
 	err := server.ListenAndServe()
 	if err != nil && err != http.ErrServerClosed {
-		log.Fatal("error on starting up server", err)
+		log.Fatal().Msgf("error on starting up server: %+v", err)
 	}
 
 	// Wait for server context to be stopped
 	<-serverCtx.Done()
-	log.Printf("Server is shut down!")
+	log.Info().Msgf("Server is shut down!")
 }

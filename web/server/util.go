@@ -1,14 +1,15 @@
 package server
 
 import (
-	"log"
 	"os"
+
+	"github.com/rs/zerolog/log"
 )
 
 func PrintEnvVariables() {
-	log.Println("ENV Variables: ")
+	log.Debug().Msg("ENV Variables: ")
 
 	for _, value := range os.Environ() {
-		log.Println(value)
+		log.Debug().Msg(value)
 	}
 }
