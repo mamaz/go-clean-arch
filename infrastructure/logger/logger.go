@@ -16,6 +16,8 @@ const PROD = "production"
 func SetupWithDebug(isDebug bool) {
 	var _logger zerolog.Logger
 
+	zerolog.DurationFieldInteger = false
+
 	switch isDebug {
 	case true:
 		// on local, for debugging sake, the log format is set to plaintext
