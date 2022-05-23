@@ -6,6 +6,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+// PrintEnvVariables print the ENV variables on debug mode only
 func PrintEnvVariables() {
 	log.Debug().Msg("ENV Variables: ")
 

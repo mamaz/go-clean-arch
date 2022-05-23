@@ -9,6 +9,11 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+type Obj struct {
+	ID   string
+	Name string
+}
+
 func Start() {
 	r := chi.NewRouter()
 
